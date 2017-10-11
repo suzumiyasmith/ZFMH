@@ -436,37 +436,40 @@ shared class ZombiesCore : RulesCore
               zombiePlaces.push_back(col);
             }
           }
-          Vec2f sp = zombiePlaces[XORRandom(zombiePlaces.length)];
           int r;
-          r = XORRandom(15);
-          if (r>=12)
-          server_CreateBlob( "wraith", -1, sp);
-          else
-          if (r>=11)
-          server_CreateBlob( "abomination", -1, sp);
-          else
-          if (r>=10)
-          server_CreateBlob( "greg", -1, sp);
-          else
-          if (r>=8)
-          server_CreateBlob( "zombieknight", -1, sp);
-          else
-          if (r>=6)
-          server_CreateBlob( "pgreg", 0, sp);
-          else
-          if (r>=6)
-          server_CreateBlob( "zbison", -1, sp);
-          else
-          if (r>=4)
-          server_CreateBlob( "phellknight", -1, sp);
-          else
-          if (r>=3)
-          server_CreateBlob( "pankou", -1, sp);
-          else
-          if (r>=1)
-          server_CreateBlob( "pbanshee", -1, sp);
-          else
-          server_CreateBlob( "skeleton", -1, sp);
+          Vec2f sp;
+          for (int ii = 0; ii < dayNumber + 1; ii++) {
+            sp = zombiePlaces[XORRandom(zombiePlaces.length)];
+            r = XORRandom(15);
+            if (r>=12)
+            server_CreateBlob( "wraith", -1, sp);
+            else
+            if (r>=11)
+            server_CreateBlob( "abomination", -1, sp);
+            else
+            if (r>=10)
+            server_CreateBlob( "greg", -1, sp);
+            else
+            if (r>=8)
+            server_CreateBlob( "zombieknight", -1, sp);
+            else
+            if (r>=6)
+            server_CreateBlob( "pgreg", 0, sp);
+            else
+            if (r>=6)
+            server_CreateBlob( "zbison", -1, sp);
+            else
+            if (r>=4)
+            server_CreateBlob( "phellknight", -1, sp);
+            else
+            if (r>=3)
+            server_CreateBlob( "pankou", -1, sp);
+            else
+            if (r>=1)
+            server_CreateBlob( "pbanshee", -1, sp);
+            else
+            server_CreateBlob( "skeleton", -1, sp);
+          }
         }
       }
     }
