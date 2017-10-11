@@ -385,8 +385,7 @@ shared class ZombiesCore : RulesCore
 
     void Update()
     {
-
-        if (rules.isGameOver()) { return; }
+    if (rules.isGameOver()) { return; }
     int day_cycle = getRules().daycycle_speed * 60;
     //int transition = rules.get_s32("transition");
     int max_zombies = rules.get_s32("max_zombies");
@@ -397,7 +396,7 @@ shared class ZombiesCore : RulesCore
     int num_migrantbots = rules.get_s32("num_migrantbots");
     int gamestart = rules.get_s32("gamestart");
     int timeElapsed = getGameTime()-gamestart;
-    float actdiff = 3.7*((getGameTime()-gamestart)/getTicksASecond()/day_cycle); //default 4.0
+    //float actdiff = 3.7*((getGameTime()-gamestart)/getTicksASecond()/day_cycle); //default 4.0
     int dayNumber = ((getGameTime()-gamestart)/getTicksASecond()/day_cycle)+1;
     int num_zombiePortals = rules.get_s32("num_zombiePortals"); //newstart portals
     CBlob@[] zombiePortal_blobs;
@@ -439,32 +438,35 @@ shared class ZombiesCore : RulesCore
           }
           Vec2f sp = zombiePlaces[XORRandom(zombiePlaces.length)];
           int r;
-          r = XORRandom(13);
-          if (r==12)
+          r = XORRandom(15);
+          if (r>=12)
           server_CreateBlob( "wraith", -1, sp);
           else
-          if (r==10)
+          if (r>=11)
+          server_CreateBlob( "abomination", -1, sp);
+          else
+          if (r>=10)
           server_CreateBlob( "greg", -1, sp);
           else
-          if (r==8)
+          if (r>=8)
           server_CreateBlob( "zombieknight", -1, sp);
           else
-          if (r==6)
-          server_CreateBlob( "gasbag", -1, sp);
+          if (r>=6)
+          server_CreateBlob( "pgreg", 0, sp);
           else
           if (r>=6)
           server_CreateBlob( "zbison", -1, sp);
           else
           if (r>=4)
-          server_CreateBlob( "zombie", -1, sp);
+          server_CreateBlob( "phellknight", -1, sp);
           else
           if (r>=3)
-          server_CreateBlob( "skeleton", -1, sp);
+          server_CreateBlob( "pankou", -1, sp);
           else
           if (r>=1)
-          server_CreateBlob( "catto", -1, sp);
+          server_CreateBlob( "pbanshee", -1, sp);
           else
-          server_CreateBlob( "zchicken", -1, sp);
+          server_CreateBlob( "skeleton", -1, sp);
         }
       }
     }
@@ -602,10 +604,10 @@ void onRestart(CRules@ this)
 
 void Reset(CRules@ this)
 {
-    printf("Restarting rules script: " + getCurrentScriptName() );
-    ZombiesSpawns spawns();
-    ZombiesCore core(this, spawns);
-    Config(core);
+  printf("Restarting rules script: " + getCurrentScriptName() );
+  ZombiesSpawns spawns();
+  ZombiesCore core(this, spawns);
+  Config(core);
   Vec2f[] zombiePlaces;
   getMap().getMarkers("zombie portal", zombiePlaces );
   if (zombiePlaces.length>0)
